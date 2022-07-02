@@ -2,8 +2,6 @@ import socket
 import time
 import random
 
-from cv2 import add
-
 def aceptar():
     perdida = random.randint(0,100)
     if(perdida >30):
