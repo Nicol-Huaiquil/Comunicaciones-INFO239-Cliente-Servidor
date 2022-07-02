@@ -27,11 +27,11 @@ bytesToSendR        = str.encode(msgFromServer)
 # Crear un socket de datagrama
 UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
-# Vincular a dirección e ip
+# Vinculando con dirección IP
 UDPServerSocket.bind((localIP, localPort))
 print("Link Available")
 
-# Escuche los datagramas entrantes
+# Escuchando los datagramas entrantes
 while(True):
 
     bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
@@ -52,11 +52,11 @@ while(True):
         tiempo = random.randint(1,3)   # con 0.5 da error 
         time.sleep(tiempo)
 
-        # Enviando una respuesta al cliente
+        # Enviando respuesta al cliente
         UDPServerSocket.sendto(bytesToSendA, address)
     else:
         print("Caracter rechazado")
-        # Enviando una respuesta al cliente
+        # Enviando respuesta al cliente
         UDPServerSocket.sendto(bytesToSendR, address)
 
     print("Link disponible")

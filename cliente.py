@@ -4,8 +4,7 @@ import time
 def tiempo_espera():
     time.sleep(2)
 
-msgFromClient       = "NICOL"
-#bytesToSend         = str.encode(msgFromClient)
+msgFromClient       = input("Escriba su nombre: ")
 serverAddressPort   = ("127.0.0.1", 20001)
 bufferSize          = 1024
 
@@ -16,7 +15,7 @@ print("Intentando enviar mensaje")
 for i in range (len(msgFromClient)):
     bytesToSend = str.encode(msgFromClient[i])
 
-    # Enviar al servidor usando el socket UDP creado
+    # Envia al servidor usando el socket UDP creado
     UDPClientSocket.sendto(bytesToSend, serverAddressPort)
     print("Caracter {} enviado".format(msgFromClient[i]))
 
@@ -37,5 +36,4 @@ for i in range (len(msgFromClient)):
             msgFromServer = UDPClientSocket.recvfrom(bufferSize)
     
 msg = "Mensaje del servidor {}".format(msgFromServer[0])
-#print("msgFromServer = ", msgFromServer)
 print(msg)
