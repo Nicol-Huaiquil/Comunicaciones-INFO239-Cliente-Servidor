@@ -10,6 +10,7 @@ bufferSize          = 1024
 
 # Crear un socket UDP en el lado del cliente
 UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+UDPClientSocket.settimeout(2)
 
 print("Intentando enviar mensaje")
 for i in range (len(msgFromClient)):
@@ -19,9 +20,18 @@ for i in range (len(msgFromClient)):
     UDPClientSocket.sendto(bytesToSend, serverAddressPort)
     print("Caracter {} enviado".format(msgFromClient[i]))
 
-    tiempo_espera()
+    booleano = True
+    while(booleano):
+        try:
+            msgFromServer = UDPClientSocket.recvfrom(bufferSize)
+        except:
+            print("Ha expirado el tiempo de espera, reenviando")
+            UDPClientSocket.sendto(bytesToSend, serverAddressPort)
+        else:
+            print("Caracter aceptado")
+            booleano = False
 
-    msgFromServer = UDPClientSocket.recvfrom(bufferSize)
+    '''
     booleano = True
     while(booleano):
         if(b"Aceptado" in msgFromServer[0]):
@@ -30,10 +40,11 @@ for i in range (len(msgFromClient)):
 
         else:
             print("Caracter rechazado")
-            print("Reenviando")
+            print("Ha expirado el tiempo de espera, reenviando")
             UDPClientSocket.sendto(bytesToSend, serverAddressPort)
             tiempo_espera()
             msgFromServer = UDPClientSocket.recvfrom(bufferSize)
+    '''
     
 msg = "Mensaje del servidor {}".format(msgFromServer[0])
 print(msg)
