@@ -29,8 +29,8 @@ for i in range (len(msgFromClient)):
             # Funciona para reiniciar el servidor pero cambia dirección IP del cliente (soluciona problema de cola)
             # Llega el nombre bien con N clientes
             # Falla cuando el servidor rechaza algún caracter, (servidor actualmente en True)
-            UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM) # Si se comenta problema con cola
-            UDPClientSocket.settimeout(2)
+            #UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM) # Si se comenta problema con cola
+            #UDPClientSocket.settimeout(2)
             UDPClientSocket.sendto(bytesToSend, serverAddressPort)
             
         else:

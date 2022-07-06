@@ -12,7 +12,8 @@ def aceptar():
 def tiempo_respuesta():
     tiempo = random.randint(500,3000)
     tiempo=tiempo/1000
-    time.sleep(tiempo)
+    #time.sleep(tiempo)
+    UDPServerSocket.settimeout(tiempo)
 
 
 localIP     = "127.0.0.1"
@@ -45,6 +46,7 @@ while(True):
         if(aceptar()):
             print("Caracter aceptado")
             tiempo_respuesta()
+            
             # Enviando respuesta al cliente
             UDPServerSocket.sendto(message, address)
             
