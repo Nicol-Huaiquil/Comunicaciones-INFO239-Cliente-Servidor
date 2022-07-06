@@ -12,7 +12,6 @@ def aceptar():
 def tiempo_respuesta():
     tiempo = random.randint(500,3000)
     tiempo=tiempo/1000
-    #time.sleep(tiempo)
     UDPServerSocket.settimeout(tiempo)
 
 
@@ -48,8 +47,7 @@ while(True):
             tiempo_respuesta()
             
             # Enviando respuesta al cliente
-            UDPServerSocket.sendto(message, address)
-            
+            UDPServerSocket.sendto(message, address) 
             
         else:
             print("Caracter rechazado")
