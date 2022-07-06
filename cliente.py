@@ -11,7 +11,7 @@ bufferSize          = 1024
 # Crear un socket UDP en el lado del cliente
 UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 UDPClientSocket.settimeout(2)
-
+mensaje = ""
 print("Intentando enviar mensaje")
 for i in range (len(msgFromClient)):
     bytesToSend = str.encode(msgFromClient[i])
@@ -26,25 +26,19 @@ for i in range (len(msgFromClient)):
             msgFromServer = UDPClientSocket.recvfrom(bufferSize)
         except:
             print("Ha expirado el tiempo de espera, reenviando")
+            # Funciona para reiniciar el servidor pero cambia dirección IP del cliente (soluciona problema de cola)
+            # Llega el nombre bien con N clientes
+            # Falla cuando el servidor rechaza algún caracter, (servidor actualmente en True)
+            UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM) # Si se comenta problema con cola
+            UDPClientSocket.settimeout(2)
             UDPClientSocket.sendto(bytesToSend, serverAddressPort)
+            
         else:
             print("Caracter aceptado")
             booleano = False
 
-    '''
-    booleano = True
-    while(booleano):
-        if(b"Aceptado" in msgFromServer[0]):
-            print("Caracter aceptado")
-            booleano = False
-
-        else:
-            print("Caracter rechazado")
-            print("Ha expirado el tiempo de espera, reenviando")
-            UDPClientSocket.sendto(bytesToSend, serverAddressPort)
-            tiempo_espera()
-            msgFromServer = UDPClientSocket.recvfrom(bufferSize)
-    '''
+    mensaje += msgFromServer[0].decode()
     
+print(mensaje)
 msg = "Mensaje del servidor {}".format(msgFromServer[0])
 print(msg)
