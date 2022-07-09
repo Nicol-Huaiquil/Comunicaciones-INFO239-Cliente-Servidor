@@ -14,7 +14,6 @@ def tiempo_respuesta():
     tiempo=tiempo/1000
     UDPServerSocket.settimeout(tiempo)
 
-
 localIP     = "127.0.0.1"
 localPort   = 20001
 bufferSize  = 1024
@@ -26,7 +25,7 @@ UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
 # Vinculando con dirección IP
 UDPServerSocket.bind((localIP, localPort))
-print("Link Available")
+print("Link disponible")
 
 # Escuchando los datagramas entrantes
 while(True):
@@ -34,13 +33,11 @@ while(True):
         bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
         message = bytesAddressPair[0]
         address = bytesAddressPair[1]
-
         clientMsg = "Mensaje del cliente:{}".format(message)
         clientIP  = "IP del cliente:{}".format(address)
-
         print(clientMsg)
         print(clientIP)
-
+        
         print("Link ocupado")
         if(aceptar()):
             print("Caracter aceptado")

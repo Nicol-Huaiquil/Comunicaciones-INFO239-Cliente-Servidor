@@ -23,6 +23,9 @@ random aceptar o no (0-30 se pierde, 31-100 se acepta)
 random de tiempo (500-3000)
 
 En terminal mostrar :
-    cantidad de paquetes perdidos
-    tiempo de atención
-    tiempo de procesar
+    tiempo promedio caracter
+    tiempo promedio total (atención por cliente)
+    promedio de cantidad de paquetes perdidos
+
+    Archivo batsh que llama clientes
+
