@@ -1,12 +1,21 @@
 import socket
-import time
 import random
+
+from numpy import true_divide
 
 def aceptar():
     perdida = random.randint(0,100)
     if(perdida >30):
         return True
     else:
+        return False
+
+def crc(caracter_bin_con_bandera):
+    if(caracter_bin_con_bandera[-2] == caracter_bin_con_bandera[-1]):
+        print("CRC correcto")
+        return True
+    else:
+        print("CRC incorrecto")
         return False
 
 def tiempo_respuesta():
@@ -39,7 +48,8 @@ while(True):
         print(clientIP)
         
         print("Link ocupado")
-        if(aceptar()):
+        if(aceptar() and crc(message)):
+            message = message[0:-1]
             print("Caracter aceptado")
             tiempo_respuesta()
             

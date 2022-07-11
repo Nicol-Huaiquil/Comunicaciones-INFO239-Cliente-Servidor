@@ -12,12 +12,11 @@ otroCliente
 MEDIO COMPARTIDO (darse la mano)
 
 Se enciende el servidor
-
 El cliente envia su nombre caracter por caracter, espera tiempo de respuesta de un caracter (2000)
-
-El servidor recibe el caracter, aplica random de aceptar o no el caracter
-si se acepta se envia confirmación en tienpo random
-si no se acepta se pierde el caracter -> el cliente vuelve a enviar el caracter perdido 
+El servidor recibe el caracter, aplica random de aceptar o no el caracter (0-30 se pierde, 31-100 se acepta)
+Si se acepta se recisa si está correcto el caracter con CRC
+Si está correcto envia confirmación en tienpo (500-3000)
+si no se acepta o si está incorrecto el caracter se pierde el caracter -> el cliente vuelve a enviar el caracter perdido 
 
 random aceptar o no (0-30 se pierde, 31-100 se acepta)
 random de tiempo (500-3000)
