@@ -21,6 +21,8 @@ si no se acepta o si está incorrecto el caracter se pierde el caracter -> el cl
 random aceptar o no (0-30 se pierde, 31-100 se acepta)
 random de tiempo (500-3000)
 
+CRC de caracter pasar a binario, aplicar xor con una key
+
 En terminal mostrar :
     tiempo promedio caracter
     tiempo promedio total (atención por cliente)

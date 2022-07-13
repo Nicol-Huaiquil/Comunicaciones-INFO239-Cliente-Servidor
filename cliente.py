@@ -2,15 +2,35 @@ import socket
 import time
 import statistics
 
-def CRC(caracter):
-    caracter_en_binario = ' '.join(format(ord(x), 'b') for x in caracter)
-    if(caracter_en_binario[-1] == "0"):
-        #par
-        caracter_con_bandera = caracter_en_binario + "0"
+def xor(dividendo, divisor ):
+    a = int(dividendo[1:],2)^int(divisor[1:],2)
+    b = '{0:0{1}b}'.format(a,len(divisor)-1)
+    return b
+
+def crc(dato):
+    dato = ' '.join(format(ord(x), 'b') for x in dato)
+    key = '1011'
+    bits = (len(key)-1) * '0'
+    dato_mas_bits = dato + bits
+    
+    
+    tmp = dato_mas_bits[0 : len(key)]
+    contador =  len(key)
+
+    while contador < len(dato_mas_bits):
+        if tmp[0] == '1':
+            tmp = xor(key, tmp) + dato_mas_bits[contador]
+        else: 
+            tmp = xor('0'*contador, tmp) + dato_mas_bits[contador]
+        contador += 1
+ 
+    if tmp[0] == '1':
+        tmp = xor(key, tmp)
     else:
-        #impar
-        caracter_con_bandera = caracter_en_binario + "1"
-    return caracter_con_bandera
+        tmp = xor('0'*contador, tmp)
+    resto = tmp
+    crc = dato + resto
+    return crc
 
 
 msgFromClient       = input("Escriba su nombre: ")
@@ -27,8 +47,8 @@ mensaje = ""
 caracteres_perdidos = 0
 inicio_tiempo_mensaje = time.time()
 for i in range (len(msgFromClient)):
-    bytesToSend = CRC(msgFromClient[i])
-    bytesToSend =bytesToSend.encode('ascii')
+    bytesToSend = crc(msgFromClient[i])
+    bytesToSend = bytesToSend.encode()
     inicio_tiempo_caracter = time.time()
     # Envia al servidor usando el socket UDP creado
     UDPClientSocket.sendto(bytesToSend, serverAddressPort)
