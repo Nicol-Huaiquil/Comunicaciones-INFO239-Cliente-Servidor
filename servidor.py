@@ -2,38 +2,35 @@ import socket
 import random
 
 def aceptar():
-    perdida = random.randint(0,100)
-    if(perdida >30):
+    perdida = random.randint(0, 100)
+    if(perdida > 30):
         return True
     else:
         return False
 
 def xor(dividendo, divisor ):
-    a = int(dividendo[1:],2)^int(divisor[1:],2)
-    b = '{0:0{1}b}'.format(a,len(divisor)-1)
+    a = int(dividendo[1:], 2) ^ int(divisor[1:], 2)
+    b = '{0:0{1}b}'.format(a, len(divisor) - 1)
     return b
  
-def crc(data,key):
-    l_key = len(key)
-    appended_data = data + '0'*(l_key-1)
+def crc(dato, key):
+    tmp = dato[0: len(key)]
+    contador = len(key)
     
-    pick = len(key)
-    tmp = data[0: pick]
- 
-    while pick < len(data):
+    while contador < len(dato):
         if tmp[0] == '1':
-            tmp = xor(key, tmp) + data[pick]
+            tmp = xor(key, tmp) + dato[contador]
         else:
-            tmp = xor('0'*pick, tmp) + data[pick]
-        pick += 1
+            tmp = xor('0'*contador, tmp) + dato[contador]
+        contador += 1
         
     if tmp[0] == '1':
         tmp = xor(key, tmp)
     else:
-        tmp = xor('0'*pick, tmp)
+        tmp = xor('0'*contador, tmp)
  
     ans = tmp
-    temp = "0" * (len(key) - 1)
+    temp = '0'*(len(key) - 1)
     if ans == temp:
         return True
     else:

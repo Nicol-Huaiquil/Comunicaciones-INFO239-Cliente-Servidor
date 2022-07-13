@@ -3,8 +3,8 @@ import time
 import statistics
 
 def xor(dividendo, divisor ):
-    a = int(dividendo[1:],2)^int(divisor[1:],2)
-    b = '{0:0{1}b}'.format(a,len(divisor)-1)
+    a = int(dividendo[1:], 2) ^ int(divisor[1:], 2)
+    b = '{0:0{1}b}'.format(a, len(divisor) - 1)
     return b
 
 def crc(dato):
@@ -12,7 +12,6 @@ def crc(dato):
     key = '1011'
     bits = (len(key)-1) * '0'
     dato_mas_bits = dato + bits
-    
     
     tmp = dato_mas_bits[0 : len(key)]
     contador =  len(key)
