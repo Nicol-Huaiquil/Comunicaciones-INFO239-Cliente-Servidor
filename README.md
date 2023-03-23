@@ -1,2 +1,3 @@
-# INFO239 - Tarea3
-Comunicaciones tarea cliente servidor. 2022 septimo semestre
+# INFO239 - Tarea de Cliente servidor
+Asignatura de comunicaciones. 2022 septimo semestre
+Se adjunta enunciado y solución
